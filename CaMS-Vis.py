@@ -1,4 +1,3 @@
-import subprocess
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -17,7 +16,7 @@ def data_input(vcf):
         if f["ALT"][h] != "<":
             f["ALT"][h] = f["REF"][h-1] + f["ALT"][h] + f["REF"][h+1]
         h += 1
-    g = "global"
+    global g
     g = f[f["ALT"]!= "<"]
     g.drop(g.columns.difference(['REF','ALT']), 1, inplace=True)
     
@@ -40,7 +39,7 @@ def mut_catalog(data):
     
     N_rows = len(set(codon_type))
     d = {'CA':np.zeros(N_rows),'CT':np.zeros(N_rows),'CG':np.zeros(N_rows),'TA':np.zeros(N_rows),'TC':np.zeros(N_rows),'TG':np.zeros(N_rows)}
-    df2 = "global"
+   global df2
     df2 = pd.DataFrame(data=d)
     df2.index = set(codon_type)
 
